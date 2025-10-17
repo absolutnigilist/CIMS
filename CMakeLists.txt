@@ -12,7 +12,7 @@ set(BOOST_ROOT "${CMAKE_SOURCE_DIR}/external/boost_1_86_0")
 set(BOOST_INCLUDEDIR "${BOOST_ROOT}")
 set(BOOST_LIBRARYDIR "${BOOST_ROOT}/stage/lib")
 
-# Подключаем заголовочные файлы
+# Подключаем заголовочные файлы 
 include_directories(${BOOST_INCLUDEDIR})
 include_directories(${CMAKE_SOURCE_DIR}/include)
 
