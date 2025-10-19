@@ -4,9 +4,10 @@
 int main() {
 	try
 	{
-		boost::asio::io_conterxt io_context;
+		boost::asio::io_context io_context;
 		Server server(io_context, 12345);
 
+		std::cout << "Server started on port 12345...\n";
 		io_context.run();
 	}
 	catch (const std::exception& e)

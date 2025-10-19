@@ -1,0 +1,3 @@
+C:/Users/nigilist/source/repos/CISM/build/CMakeFiles/boost_tcp_server.dir
+C:/Users/nigilist/source/repos/CISM/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/nigilist/source/repos/CISM/build/CMakeFiles/ZERO_CHECK.dir

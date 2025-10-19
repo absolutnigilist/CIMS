@@ -1,21 +1,26 @@
 #pragma once
+
 #include <boost/asio.hpp>
 #include<memory>
 #include <iostream>
 
-//---Один клиент — один объект Session
-
+//--------------------------------------------------------------------------------------------
+//		Session
+//--------------------------------------------------------------------------------------------
 class Session :public std::enable_shared_from_this<Session> {
 public:
 	explicit Session(boost::asio::ip::tcp::socket);
 
+	//---Начало обмена сообщениями
 	void start();
+
 private:
 	//---Асинхронное чтение
 	void do_read();
 	void do_write(const std::string& messge);
 
+	//---Сокет для общения с клиентом
 	boost::asio::ip::tcp::socket socket_;
-	std::array<char, 1024> buffer;
+	std::array<char, 1024> buffer_;
 
 };

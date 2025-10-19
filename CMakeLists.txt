@@ -8,7 +8,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_BUILD_TYPE Debug)
 
 # Добавляем путь к локальном Boost
-set(BOOST_ROOT "${CMAKE_SOURCE_DIR}/external/boost_1_86_0")
+set(BOOST_ROOT "${CMAKE_SOURCE_DIR}/external/boost_1_89_0")
 set(BOOST_INCLUDEDIR "${BOOST_ROOT}")
 set(BOOST_LIBRARYDIR "${BOOST_ROOT}/stage/lib")
 
@@ -22,11 +22,16 @@ set(SOURCES
 	src/server.cpp 
 	src/session.cpp 
 )
+
+# Windows 10
+add_definitions(-D_WIN32_WINNT=0x0A00)
 # Создание исполняемого файла
 add_executable(boost_tcp_server ${SOURCES})
 
-# Линковка с Boost
-target_link_libraries(boost_tcp_server PRIVATE pthread)
+# Линковка с Boost 
+if (NOT WIN32)
+	target_link_libraries(boost_tcp_server PRIVATE pthread)
+endif()
 
 # Включение горячей перезагрузки для компиляторов MSVC, если поддерживается.
 if (POLICY CMP0141)
