@@ -11,15 +11,15 @@ class Session :public std::enable_shared_from_this<Session> {
 public:
 	explicit Session(boost::asio::ip::tcp::socket);
 
-	//---Начало обмена сообщениями
+	//---РќР°С‡Р°Р»Рѕ РѕР±РјРµРЅР° СЃРѕРѕР±С‰РµРЅРёСЏРјРё
 	void start();
 
 private:
-	//---Асинхронное чтение
+	//---РђСЃРёРЅС…СЂРѕРЅРЅРѕРµ С‡С‚РµРЅРёРµ
 	void do_read();
 	void do_write(const std::string& messge);
 
-	//---Сокет для общения с клиентом
+	//---РЎРѕРєРµС‚ РґР»СЏ РѕР±С‰РµРЅРёСЏ СЃ РєР»РёРµРЅС‚РѕРј
 	boost::asio::ip::tcp::socket socket_;
 	std::array<char, 1024> buffer_;
 
