@@ -1,2 +1,0 @@
-# Включить поддержку длинных путей
-git config --system core.longpaths
