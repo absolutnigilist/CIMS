@@ -6,9 +6,7 @@ int main(int argc, char* argv[]) {
 
 	// --- Инициализация GLOG
 	google::InitGoogleLogging(argv[0]);
-	google::SetStderrLogging(google::INFO);						//		Логировать всё INFO и выше в stderr
-	google::SetLogDestination(google::ERROR, "logs/error_");	//		Ошибки в файл logs/error_*
-
+	LOG(INFO) << "Server is starting...";
 	try
 	{
 		boost::asio::io_context io_context;

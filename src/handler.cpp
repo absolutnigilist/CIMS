@@ -15,5 +15,5 @@ std::string Handler::handle(const std::string& input) {
 
 	}
 
-
+	return "";
 }
