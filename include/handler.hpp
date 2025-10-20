@@ -10,7 +10,7 @@ namespace json = boost::json;
 
 class Handler {
 public:
-	//---Обработка входящего JSON-сообщения
+	//---РћР±СЂР°Р±РѕС‚РєР° РІС…РѕРґСЏС‰РµРіРѕ JSON-СЃРѕРѕР±С‰РµРЅРёСЏ
 	static std::string handle(const std::string& input);
 
 

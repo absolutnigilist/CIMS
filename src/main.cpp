@@ -4,10 +4,10 @@
 
 int main(int argc, char* argv[]) {
 
-	// --- Инициализация GLOG
+	// --- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ GLOG
 	google::InitGoogleLogging(argv[0]);
-	google::SetStderrLogging(google::INFO);						//		Логировать всё INFO и выше в stderr
-	google::SetLogDestination(google::ERROR, "logs/error_");	//		Ошибки в файл logs/error_*
+	google::SetStderrLogging(google::INFO);						//		Р›РѕРіРёСЂРѕРІР°С‚СЊ РІСЃС‘ INFO Рё РІС‹С€Рµ РІ stderr
+	google::SetLogDestination(google::ERROR, "logs/error_");	//		РћС€РёР±РєРё РІ С„Р°Р№Р» logs/error_*
 
 	try
 	{

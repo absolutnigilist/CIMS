@@ -3,7 +3,7 @@
 std::string Handler::handle(const std::string& input) {
 	try
 	{
-		//---Парсим строку в JSON
+		//---РџР°СЂСЃРёРј СЃС‚СЂРѕРєСѓ РІ JSON
 		json::value parsed = json::parse(input);
 		if (!parsed.is_object())
 		{
