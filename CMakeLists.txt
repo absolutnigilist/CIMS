@@ -41,6 +41,12 @@ set(SOURCES
 # ----------------------------------------
 add_executable(boost_tcp_server ${SOURCES})
 
+# Директория для логов
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/logs)
+target_compile_definitions(boost_tcp_server PRIVATE 
+    LOG_DIR="${CMAKE_BINARY_DIR}/logs"
+)
+
 # Линковка с Glog
 target_link_libraries(boost_tcp_server PRIVATE glog::glog libboost_json)
 
