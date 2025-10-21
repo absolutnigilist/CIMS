@@ -1,0 +1,9 @@
+{
+  "name": "cims-server",
+  "version-string": "0.1",
+  "dependencies": [
+    "glog",
+    "boost-json",
+    "boost-asio"
+  ]
+}
