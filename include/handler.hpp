@@ -5,15 +5,17 @@
 #include <functional>
 #include <string>
 #include <iostream>
+#include "queue.hpp"
 
 namespace json = boost::json;
 
 class Handler {
 public:
 	//---Обработка входящего JSON-сообщения
-	static std::string handle(const std::string& input);
+	static std::string handle(const std::string& input, Queue<int>& queue);
 
-
-
-	using HandlerFunction = std::function<json::object(const boost::json::object&)>;
+private:
+	//---Утилиты для формирования ответов
+	static std::string makeOK(const std::string& msg, const json::object& data = {});
+	static std::string makeError(const std::string& msg);
 };

@@ -1,4 +1,7 @@
 #include "session.hpp"
+#include "handler.hpp"
+#include <glog/logging.h>
+
 
 using boost::asio::ip::tcp;
 
@@ -10,27 +13,41 @@ void Session::start() {
 }
 void Session::do_read() {
 	auto self = shared_from_this();
-	socket_.async_read_some(
-		boost::asio::buffer(buffer_),
-		[this, self](boost::system::error_code ec, std::size_t length)
+	boost::asio::async_read_until(
+		socket_, readbuf_, '\n',
+		[this, self](boost::system::error_code ec, std::size_t)
 		{
-			if (!ec)
+			if (ec)
 			{
-				std::string data(buffer_.data(), length);
-				std::cout << "Received message: " << data << "\n";
+				if (ec == boost::asio::error::eof ||
+					ec == boost::asio::error::connection_reset ||
+					ec == boost::asio::error::operation_aborted)
+				{
+					// Нормальное завершение — клиент отключился
+					LOG(INFO) << "Client disconnected";
+				}
 
-				std::string response = "Echo: " + data;
-				do_write(response);
+				else
+				{
+					std::cerr << "Read error: " << ec.message() << "\n";
+				}
+				return; //---прекращаем сессию (shared_ptr сам очистится)
 			}
-			else
+			std::istream is(&readbuf_);
+			std::string line;
+			std::getline(is, line);						// '\n' уже вычитан из буфера
+			if (!line.empty() && line.back() == '\r')
 			{
-				std::cerr << "Read error: " << ec.message() << "\n";
+				line.pop_back();						// на случай CRLF от клиента
 			}
+			std::string response = Handler::handle(line, queue_);
+			do_write(response);
 		});
 }
 void Session::do_write(const std::string& message) {
-	auto buffer = std::make_shared<std::string>(message);
+	
 	auto self = shared_from_this();
+	auto buffer = std::make_shared<std::string>(message);
 	boost::asio::async_write(
 		socket_,
 		boost::asio::buffer(*buffer),

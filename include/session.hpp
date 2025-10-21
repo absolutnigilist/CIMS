@@ -3,6 +3,8 @@
 #include <boost/asio.hpp>
 #include<memory>
 #include <iostream>
+#include "queue.hpp"
+#include <boost/asio/streambuf.hpp>
 
 //--------------------------------------------------------------------------------------------
 //		Session
@@ -21,6 +23,10 @@ private:
 
 	//---Сокет для общения с клиентом
 	boost::asio::ip::tcp::socket socket_;
-	std::array<char, 1024> buffer_;
 
+	//---Буфер для построчного чтения (JSON Lines, \n-делимитер)
+	boost::asio::streambuf readbuf_;
+
+	//---Очередь для данного клиента
+	Queue<int> queue_;
 };
