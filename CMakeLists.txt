@@ -15,6 +15,7 @@ set(CMAKE_BUILD_TYPE Debug)
 # Boost (header-only)
 set(BOOST_ROOT "${CMAKE_SOURCE_DIR}/external/boost_1_89_0")
 include_directories(${BOOST_ROOT})
+link_directories(${BOOST_ROOT}/stage/lib)
 
 # Glog (DLL)
 set(GLOG_INSTALL_DIR "${CMAKE_SOURCE_DIR}/external/glog")
@@ -41,7 +42,7 @@ set(SOURCES
 add_executable(boost_tcp_server ${SOURCES})
 
 # Линковка с Glog
-target_link_libraries(boost_tcp_server PRIVATE glog::glog)
+target_link_libraries(boost_tcp_server PRIVATE glog::glog libboost_json)
 
 # Windows 10
 add_definitions(-D_WIN32_WINNT=0x0A00)
