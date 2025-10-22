@@ -5,3 +5,5 @@
 # Visual Studio 2022 с компонентами: Desktop development with C++ (MSVC v143, C++ CMake tools)
 
 # Git, CMake 3.23+ (идёт с VS), PowerShell
+
+# Запусти ext_install.bat
