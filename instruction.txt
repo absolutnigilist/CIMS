@@ -1,15 +1,20 @@
 # Включить поддержку длинных путей
 git config --system core.longpaths
 
-# После клона установить vcpkg и выставить VCPKG_ROOT
+# Клонируем vcpkg в профиль пользователя
+# Объявляем переменную окружения текущей сессии
+# Бутстрапим vcpkg
 git clone https://github.com/microsoft/vcpkg $env:USERPROFILE\vcpkg
 $env:VCPKG_ROOT="$env:USERPROFILE\vcpkg"
 & $env:VCPKG_ROOT\bootstrap-vcpkg.bat
 
-git clone --recurse-submodules https://.../CIMS.git
+# Клонировать репозиторий с сабмодулями
+git clone --recurse-submodules https://github.com/absolutnigilist/CIMS
 cd CIMS
+
 # на случай, если кто-то забыл флаг:
 git submodule update --init --recursive
+cd
 # bootstrap vcpkg (один раз на машине)
 ./external/vcpkg/bootstrap-vcpkg.bat
 
@@ -17,10 +22,6 @@ git submodule update --init --recursive
 cmake --preset qt-client-vs2022-debug
 cmake --build --preset qt-client-vs2022-debug
 
-
+# Конфигурация и сборка сервера
 cmake --preset server-vs2022-debug
 cmake --build --preset server-vs2022-debug
-
-cmake --preset qt-client-vs2022-debug
-cmake --build --preset qt-client-vs2022-debug
-
